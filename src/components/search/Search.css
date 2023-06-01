@@ -67,3 +67,13 @@
 .place-list li:hover {
   background-color: #1a1d1f;
 }
+
+@media screen and (max-width: 700px) {
+  .input-field {
+    width: 70%;
+    margin-bottom: 1em;
+  }
+  .search-btn {
+    width: 30%;
+  }
+}
