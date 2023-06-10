@@ -2,14 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC0nr3quNKOVa1pNP0rqcvRdJAbzphDMnQ",
-  authDomain: "saferoutes-1f420.firebaseapp.com",
-  projectId: "saferoutes-1f420",
-  storageBucket: "saferoutes-1f420.appspot.com",
-  messagingSenderId: "6528901331",
-  appId: "1:6528901331:web:89e76f7f45a3a9c1017426",
+  apiKey: "AIzaSyDBJxwrsc-nBOtOzLcTPWr8t6yNFdfFW30",
+  authDomain: "saferoutesdb.firebaseapp.com",
+  projectId: "saferoutesdb",
+  storageBucket: "saferoutesdb.appspot.com",
+  messagingSenderId: "467090184600",
+  appId: "1:467090184600:web:39dcc28064c390220fb3ed",
 };
-
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
