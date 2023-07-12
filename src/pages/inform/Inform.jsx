@@ -53,9 +53,15 @@ export default function Inform() {
       await classifyNews(`${message} ${location}`);
       console.log(`Crime ${crime}`);
       try {
-        const docRef = doc(db, "locations", placeDetails["display_name"]);
+        const docRef = doc(
+          db,
+          "locations",
+          placeDetails["display_name"].replace(/\//g, " ")
+        );
         const docSnap = await getDoc(docRef);
         console.log(docSnap);
+
+        console.log(placeDetails);
 
         if (docSnap.exists()) {
           await updateDoc(docRef, {
@@ -164,26 +170,34 @@ export default function Inform() {
           console.log("Avoid coordinates added");
           console.log(docRef2.id);
 
-          await setDoc(doc(db, "locations", placeDetails["display_name"]), {
-            coordinates: [
-              parseFloat(placeDetails["lon"]),
-              parseFloat(placeDetails["lat"]),
-            ],
-            weight: 1,
-            robbery: crime === "Robbery" ? 1 : 0,
-            violence: crime === "Violence Against the Person" ? 1 : 0,
-            burglary: crime === "Burglary" ? 1 : 0,
-            theft_and_handling: crime === "Theft and Handling" ? 1 : 0,
-            criminal_damage: crime === "Criminal Damage" ? 1 : 0,
-            drug: crime === "Drugs" ? 1 : 0,
-            fraud: crime === "Fraud or Forgery" ? 1 : 0,
-            other_offence: crime === "Other Notifiable Offences" ? 1 : 0,
-            sexual_offence: crime === "Sexual Offences" ? 1 : 0,
-          });
+          await setDoc(
+            doc(
+              db,
+              "locations",
+              placeDetails["display_name"].replace(/\//g, " ")
+            ),
+            {
+              coordinates: [
+                parseFloat(placeDetails["lon"]),
+                parseFloat(placeDetails["lat"]),
+              ],
+              weight: 1,
+              robbery: crime === "Robbery" ? 1 : 0,
+              violence: crime === "Violence Against the Person" ? 1 : 0,
+              burglary: crime === "Burglary" ? 1 : 0,
+              theft_and_handling: crime === "Theft and Handling" ? 1 : 0,
+              criminal_damage: crime === "Criminal Damage" ? 1 : 0,
+              drug: crime === "Drugs" ? 1 : 0,
+              fraud: crime === "Fraud or Forgery" ? 1 : 0,
+              other_offence: crime === "Other Notifiable Offences" ? 1 : 0,
+              sexual_offence: crime === "Sexual Offences" ? 1 : 0,
+            }
+          );
           console.log("Successful");
         }
       } catch (err) {
         console.log("Could not save document");
+        console.log(err.message);
       }
     }
   };
